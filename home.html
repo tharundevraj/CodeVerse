@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <section class="flex">
+        <a href="home.html" class="logo"><div class="logo-div"><img src="CodeVerse.png" alt="" class="logo-img"><span>CodeVerse</span></div></a>
+
+        <form id="search-form" method="post" class="search-form" enctype="multipart/form-data">
+          <input
+            type="text"
+            name="search_box"
+            id="search_box"
+            required
+            placeholder="Search Courses"
+            maxlength="100"
+          />
+          <button type="submit" class="fas fa-search"></button>
+        </form>
+
+        <div class="icons">
+          <div id="menu-btn" class="fas fa-bars"></div>
+          <div id="search-btn" class="fas fa-search"></div>
+          <div id="user-btn" class="fas fa-user"></div>
+          <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+          <img src="pic-1.jpg" class="image" alt="" />
+          <h3 class="name">Tharun D</h3>
+          <p class="role">Student</p>
+          <a href="profile.html" class="btn">View Profile</a>
+         
+        </div>
+      </section>
+    </header>
+
+    <div class="side-bar">
+      <div id="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="profile">
+        <img src="pic-1.jpg" class="image" alt="" />
+        <h3 class="name">Tharun D</h3>
+        <p class="role">Student</p>
+        <a href="profile.html" class="btn">view profile</a>
+      </div>
+
+      <nav class="navbar">
+        <a href="home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="about.html"
+          ><i class="fas fa-question"></i><span>About</span></a
+        >
+        <a href="courses.html"
+          ><i class="fas fa-graduation-cap"></i><span>Courses</span></a
+        >
+        <a href="teachers.html"
+          ><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a
+        >
+        <a href="contact.html"
+          ><i class="fas fa-headset"></i><span>Contact us</span></a
+        >
+      </nav>
+    </div>
+
+
+
+    <div class="course-carousel">
+      <div class="carousel-container">
+          <div class="carousel-slide">
+              <a href="playlist.html"><img src="webdevbeginners.jpg" alt="Course Image" class="course-img"><h2>WEB DEVELOPMENT</h2></a>
+          </div>
+          <div class="carousel-slide">
+              <img src="images/c-programming-language-with-script-sample-and-laptop-illustration-free-vector.jpg" alt="Course Image" class="course-img">
+              <h2>C PROGRAMMING</h2>
+          </div>
+          <div class="carousel-slide">
+              <img src="images/Learning-Data-Structures-and-Algorithms-is-Important1.png" alt="Course Image" class="course-img">
+              <h2>DSA</h2>
+          </div>
+          <div class="carousel-slide">
+              <img src="oo.png" alt="Course Image" class="course-img">
+              <h2>JAVA PROGRAMMING</h2>
+          </div>
+          <div class="carousel-slide">
+              <img src="ETHICAL-HACKING.jpg" alt="Course Image" class="course-img">
+              <h2>ETHICAL HACKING</h2>          
+          </div>
+          <div class="carousel-slide">
+              <img src="Best-Courses-to-Learn-Data-Science.webp" alt="Course Image" class="course-img">
+              <h2>DATA SCIENCE</h2>
+          </div>          
+          <!-- Add more carousel slides as needed -->
+      </div>
+      <button id="prevBtn"><i class="fas fa-chevron-left" ></i></button>
+  <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  
+</div>
+
+    <section class="courses">
+      <h1 class="heading">Our popular courses</h1>
+      <div class="webdev">
+        <h2 class="domain">Web development</h2>
+         <br>
+        <div class="box-container">
+          <div class="box">
+            <div class="tutor">
+              <img src="pic-2.jpg" alt="" />
+              <div class="info">
+                <h3>JOHN CONNORS</h3>
+              </div>
+            </div>
+            <div class="thumb">
+              <img src="html.jpg" alt="" />
+              <span>5 hours</span>
+            </div>
+            <h3 class="title">Complete HTML tutorial</h3>
+            <a href="playlist.html" class="inline-btn">Start learning</a>
+          </div>
+
+          <div class="box">
+            <div class="tutor">
+              <img src="pic-3.jpg" alt="" />
+              <div class="info">
+                <h3>JONAS SCHMEDTMANN</h3>
+              </div>
+            </div>
+            <div class="thumb">
+              <img src="thumb-2.png" alt="" />
+              <span>8 hours</span>
+            </div>
+            <h3 class="title">Complete CSS Tutorial</h3>
+            <a href="cssplaylist.html" class="inline-btn">Start learning</a>
+          </div>
+
+          <div class="box">
+            <div class="tutor">
+              <img src="pic-4.jpg" alt="" />
+              <div class="info">
+                <h3>COLT STEELE</h3>
+              </div>
+            </div>
+            <div class="thumb">
+              <img src="js.avif" alt="" />
+              <span>20 hours</span>
+            </div>
+            <h3 class="title">Complete JS tutorial</h3>
+            <a href="jsplaylist.html" class="inline-btn">Start learning</a>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <div class="webdev">
+         <h2 class="domain">Data structures and Algorithms</h2>
+         <br>
+ 
+         <div class="box-container">
+           <div class="box">
+             <div class="tutor">
+               <img src="pic-2.jpg" alt="" />
+               <div class="info">
+                 <h3>JOHN CONNORS</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="DSAInC.png" alt="" />
+               <span>50 hours</span>
+             </div>
+             <h3 class="title">Complete DSA in C</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+ 
+           <div class="box">
+             <div class="tutor">
+               <img src="pic-3.jpg" alt="" />
+               <div class="info">
+                 <h3>JONAS SCHMEDTMANN</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="DSAInJava.jpg" alt="" />
+               <span>18 hours</span>
+             </div>
+             <h3 class="title">Complete DSA in JAVA</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+ 
+           <div class="box">
+             <div class="tutor">
+               <img src="PIC-4.jpg" alt="" />
+               <div class="info">
+                 <h3>COLT STEELE</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="algorithms.png" alt="" />
+               <span>10 hours</span>
+             </div>
+             <h3 class="title">Algorithms:Zero to hero</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+         </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="webdev">
+         <h2 class="domain">Popular programming Languages</h2>
+         <br>
+ 
+         <div class="box-container">
+           <div class="box">
+             <div class="tutor">
+               <img src="pic-2.jpg" alt="" />
+               <div class="info">
+                 <h3>JOHN CONNORS</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="cpp.png" alt="" />
+               <span>18 hours</span>
+             </div>
+             <h3 class="title">Complete C++ course</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+ 
+           <div class="box">
+             <div class="tutor">
+               <img src="pic-3.jpg" alt="" />
+               <div class="info">
+                 <h3>JONAS SCHMEDTMANN</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="java.cms" alt="" />
+               <span>18 hours</span>
+             </div>
+             <h3 class="title">Complete JAVA Programming</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+ 
+           <div class="box">
+             <div class="tutor">
+               <img src="pic-4.jpg" alt="" />
+               <div class="info">
+                 <h3>COLT STEELE</h3>
+               </div>
+             </div>
+             <div class="thumb">
+               <img src="c-programming.jpg" alt="" />
+               <span>20 hours</span>
+             </div>
+             <h3 class="title">Complete C Programming</h3>
+             <a href="playlist.html" class="inline-btn">Start learning</a>
+           </div>
+         </div>
+      </div>
+
+      <div class="more-btn">
+        <a href="courses.html" class="inline-option-btn">View all courses</a>
+      </div>
+    </section>
+
+    
+    <footer>
+      <div class="center">
+          Copyright &copy;www.CodeVerse.com. All rights are reserved!
+      </div>
+  </footer>
+
+    <!-- custom js file link  -->
+    <script src="script.js"></script>
+  </body>
+</html>

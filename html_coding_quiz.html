@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Coding Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: rgba(216, 215, 215, 0.95);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item h3 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .challenge-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .challenge-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .difficulty {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .easy { background: #d4edda; color: #155724; }
+        .medium { background: #fff3cd; color: #856404; }
+        .hard { background: #f8d7da; color: #721c24; }
+
+        .problem-description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .code-editor {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .code-editor textarea {
+            width: 100%;
+            height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            line-height: 1.5;
+        }
+
+        .code-editor textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .preview-area {
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+
+        .preview-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f1b0b7;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.5s ease;
+        }
+
+        .next-btn {
+            display: none;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .completion-message.show {
+            display: block;
+            animation: bounceIn 0.8s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .tips {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .tips h4 {
+            color: #0c5460;
+            margin-bottom: 8px;
+        }
+
+        .tips ul {
+            padding-left: 20px;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HTML Coding Challenge</h1>
+            <p>Test your HTML skills with interactive coding challenges!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <h3 id="currentScore">0</h3>
+                <p>Current Score</p>
+            </div>
+            <div class="score-item">
+                <h3 id="totalQuestions">5</h3>
+                <p>Total Questions</p>
+            </div>
+            <div class="score-item">
+                <h3 id="currentQuestion">1</h3>
+                <p>Current Question</p>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="challengeContainer">
+            <!-- Challenges will be loaded here -->
+        </div>
+
+        <div class="completion-message" id="completionMessage">
+            <h2>🎉 Congratulations!</h2>
+            <p>You've completed all challenges!</p>
+            <p>Your final score: <span id="finalScore">0</span>/100</p>
+            <button class="btn btn-primary" onclick="restartQuiz()">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let currentChallengeIndex = 0;
+        let totalScore = 0;
+        let maxScore = 100;
+
+        const challenges = [
+            {
+                title: "Basic HTML Structure",
+                difficulty: "easy",
+                points: 15,
+                description: "Create a basic HTML page with a title 'My First Page' and a heading that says 'Welcome to HTML!'",
+                expectedElements: ["title", "h1"],
+                expectedText: {
+                    title: "My First Page",
+                    h1: "Welcome to HTML!"
+                },
+                tips: [
+                    "Remember to include the &lt;title&gt; tag in the &lt;head&gt; section",
+                    "Use &lt;h1&gt; for the main heading",
+                    "Don't forget proper HTML structure"
+                ]
+            },
+            {
+                title: "Creating Lists",
+                difficulty: "easy",
+                points: 20,
+                description: "Create an unordered list with three items: 'Apple', 'Banana', and 'Orange'",
+                expectedElements: ["ul", "li"],
+                expectedText: {
+                    li: ["Apple", "Banana", "Orange"]
+                },
+                tips: [
+                    "Use &lt;ul&gt; for unordered lists",
+                    "Each item should be wrapped in &lt;li&gt; tags",
+                    "Make sure to close all tags properly"
+                ]
+            },
+            {
+                title: "Working with Links",
+                difficulty: "medium",
+                points: 25,
+                description: "Create a link to 'https://www.google.com' with the text 'Visit Google' and make it open in a new tab",
+                expectedElements: ["a"],
+                expectedAttributes: {
+                    a: {
+                        href: "https://www.google.com",
+                        target: "_blank"
+                    }
+                },
+                expectedText: {
+                    a: "Visit Google"
+                },
+                tips: [
+                    "Use the &lt;a&gt; tag for links",
+                    "Add target='_blank' to open in new tab",
+                    "Don't forget the href attribute"
+                ]
+            },
+            {
+                title: "Creating a Table",
+                difficulty: "medium",
+                points: 30,
+                description: "Create a table with headers 'Name' and 'Age', and one row with data 'John' and '25'",
+                expectedElements: ["table", "tr", "th", "td"],
+                expectedText: {
+                    th: ["Name", "Age"],
+                    td: ["John", "25"]
+                },
+                tips: [
+                    "Use &lt;table&gt; to create the table structure",
+                    "Use &lt;th&gt; for table headers",
+                    "Use &lt;td&gt; for table data",
+                    "Each row should be wrapped in &lt;tr&gt; tags"
+                ]
+            },
+            {
+                title: "Form Elements",
+                difficulty: "hard",
+                points: 10,
+                description: "Create a form with a text input for 'username' and a submit button with text 'Submit'",
+                expectedElements: ["form", "input", "button"],
+                expectedAttributes: {
+                    input: {
+                        type: "text",
+                        name: "username"
+                    },
+                    button: {
+                        type: "submit"
+                    }
+                },
+                expectedText: {
+                    button: "Submit"
+                },
+                tips: [
+                    "Use &lt;form&gt; to wrap form elements",
+                    "Add name attribute to input fields",
+                    "Use type='submit' for submit buttons"
+                ]
+            }
+        ];
+
+        function loadChallenge(index) {
+            const challenge = challenges[index];
+            const container = document.getElementById('challengeContainer');
+            
+            container.innerHTML = `
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-title">${challenge.title}</div>
+                        <div class="difficulty ${challenge.difficulty}">${challenge.difficulty.toUpperCase()}</div>
+                    </div>
+                    
+                    <div class="problem-description">
+                        <strong>Problem:</strong> ${challenge.description}
+                        <br><br>
+                        <strong>Points:</strong> ${challenge.points}
+                    </div>
+
+                    <div class="tips">
+                        <h4>💡 Tips:</h4>
+                        <ul>
+                            ${challenge.tips.map(tip => `<li>${tip}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="code-editor">
+                        <textarea id="codeInput" placeholder="Write your HTML code here..."></textarea>
+                    </div>
+                    
+                    <div class="preview-area">
+                        <div class="preview-title">Preview:</div>
+                        <div id="preview"></div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="previewCode()">Preview</button>
+                        <button class="btn btn-success" onclick="submitCode()">Submit</button>
+                        <button class="btn btn-warning" onclick="getHint()">Get Hint</button>
+                        <button class="btn btn-primary next-btn" id="nextBtn" onclick="nextChallenge()">Next Challenge</button>
+                    </div>
+                    
+                    <div class="result" id="result"></div>
+                </div>
+            `;
+            
+            updateProgress();
+        }
+
+        function previewCode() {
+            const code = document.getElementById('codeInput').value;
+            const preview = document.getElementById('preview');
+            preview.innerHTML = code;
+        }
+
+        function submitCode() {
+            const code = document.getElementById('codeInput').value;
+            const challenge = challenges[currentChallengeIndex];
+            let score = 0;
+            let feedback = [];
+            
+            // Create a temporary element to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = code;
+            
+            // Check for expected elements
+            if (challenge.expectedElements) {
+                challenge.expectedElements.forEach(element => {
+                    const elements = tempDiv.querySelectorAll(element);
+                    if (elements.length > 0) {
+                        score += challenge.points / challenge.expectedElements.length;
+                        feedback.push(`✓ Found ${element} element`);
+                    } else {
+                        feedback.push(`✗ Missing ${element} element`);
+                    }
+                });
+            }
+            
+            // Check for expected text content
+            if (challenge.expectedText) {
+                Object.keys(challenge.expectedText).forEach(element => {
+                    const elements = tempDiv.querySelectorAll(element);
+                    const expectedText = challenge.expectedText[element];
+                    
+                    if (Array.isArray(expectedText)) {
+                        // For multiple elements like li items
+                        let foundCount = 0;
+                        expectedText.forEach(text => {
+                            Array.from(elements).forEach(el => {
+                                if (el.textContent.trim() === text) {
+                                    foundCount++;
+                                }
+                            });
+                        });
+                        
+                        if (foundCount === expectedText.length) {
+                            feedback.push(`✓ Correct text content for ${element}`);
+                        } else {
+                            feedback.push(`✗ Incorrect text content for ${element}`);
+                            score *= 0.7; // Reduce score for incorrect text
+                        }
+                    } else {
+                        // For single elements
+                        if (elements.length > 0 && elements[0].textContent.trim() === expectedText) {
+                            feedback.push(`✓ Correct text content for ${element}`);
+                        } else {
+                            feedback.push(`✗ Incorrect text content for ${element}`);
+                            score *= 0.7;
+                        }
+                    }
+                });
+            }
+            
+            // Check for expected attributes
+            if (challenge.expectedAttributes) {
+                Object.keys(challenge.expectedAttributes).forEach(element => {
+                    const elements = tempDiv.querySelectorAll(element);
+                    const expectedAttrs = challenge.expectedAttributes[element];
+                    
+                    if (elements.length > 0) {
+                        Object.keys(expectedAttrs).forEach(attr => {
+                            if (elements[0].getAttribute(attr) === expectedAttrs[attr]) {
+                                feedback.push(`✓ Correct ${attr} attribute for ${element}`);
+                            } else {
+                                feedback.push(`✗ Incorrect ${attr} attribute for ${element}`);
+                                score *= 0.8;
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Round the score
+            score = Math.round(score);
+            
+            // Update total score
+            totalScore += score;
+            
+            // Show result
+            const resultDiv = document.getElementById('result');
+            const isCorrect = score >= challenge.points * 0.7;
+            
+            resultDiv.className = `result show ${isCorrect ? 'correct' : 'incorrect'}`;
+            resultDiv.innerHTML = `
+                <strong>Score: ${score}/${challenge.points} points</strong><br>
+                ${feedback.join('<br>')}
+            `;
+            
+            // Update score display
+            document.getElementById('currentScore').textContent = totalScore;
+            
+            // Show next button if there are more challenges
+            if (currentChallengeIndex < challenges.length - 1) {
+                document.getElementById('nextBtn').classList.add('show');
+            } else {
+                // Show completion message
+                setTimeout(() => {
+                    document.getElementById('completionMessage').classList.add('show');
+                    document.getElementById('finalScore').textContent = totalScore;
+                }, 1000);
+            }
+        }
+
+        function nextChallenge() {
+            currentChallengeIndex++;
+            if (currentChallengeIndex < challenges.length) {
+                loadChallenge(currentChallengeIndex);
+                document.getElementById('currentQuestion').textContent = currentChallengeIndex + 1;
+            }
+        }
+
+        function getHint() {
+            const challenge = challenges[currentChallengeIndex];
+            const hints = {
+                0: "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Welcome to HTML!</h1>\n</body>\n</html>",
+                1: "<ul>\n  <li>Apple</li>\n  <li>Banana</li>\n  <li>Orange</li>\n</ul>",
+                2: "<a href=\"https://www.google.com\" target=\"_blank\">Visit Google</a>",
+                3: "<table>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>John</td>\n    <td>25</td>\n  </tr>\n</table>",
+                4: "<form>\n  <input type=\"text\" name=\"username\">\n  <button type=\"submit\">Submit</button>\n</form>"
+            };
+            
+            document.getElementById('codeInput').value = hints[currentChallengeIndex];
+            previewCode();
+        }
+
+        function updateProgress() {
+            const progress = (currentChallengeIndex / challenges.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function restartQuiz() {
+            currentChallengeIndex = 0;
+            totalScore = 0;
+            document.getElementById('currentScore').textContent = 0;
+            document.getElementById('currentQuestion').textContent = 1;
+            document.getElementById('completionMessage').classList.remove('show');
+            loadChallenge(0);
+        }
+
+        // Initialize the quiz
+        loadChallenge(0);
+    </script>
+</body>
+</html>
